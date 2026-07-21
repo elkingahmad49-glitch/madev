@@ -156,7 +156,7 @@
 
   /* terminal signature card */
   .term-card{
-    position:absolute;bottom:-38px;left:-38px;width:290px;
+    position:absolute;bottom:-38px;left:-38px;width:320px;
     background:rgba(13,13,28,0.92);border:1px solid var(--card-border);border-radius:14px;
     box-shadow:0 20px 50px -10px rgba(0,0,0,0.6);backdrop-filter:blur(14px);
     animation:float-card 5s ease-in-out infinite;
@@ -168,7 +168,7 @@
   .term-bar span:nth-child(2){background:#ffbd2e;}
   .term-bar span:nth-child(3){background:#27c93f;}
   .term-bar em{font-style:normal;font-family:var(--font-mono);font-size:10px;color:var(--text-dim);margin-left:6px;}
-  .term-body{padding:13px 14px;font-family:var(--font-mono);font-size:11.5px;color:#9df5b0;min-height:92px;}
+  .term-body{padding:13px 14px;font-family:var(--font-mono);font-size:11px;color:#9df5b0;min-height:190px;max-height:190px;overflow:hidden;}
   .term-body .line{color:var(--text-secondary);margin-bottom:5px;}
   .term-body .line b{color:var(--purple);font-weight:500;}
   .term-body .ok{color:#9df5b0;}
@@ -665,7 +665,7 @@
       <div class="contact-socials">
         <a href="https://wa.me/6285245126619" target="_blank" class="soc-btn"><span class="ic">💬</span> WhatsApp</a>
         <a href="https://instagram.com/madxiimut" target="_blank" class="soc-btn"><span class="ic">📸</span> @madxiimut</a>
-        <a href="https://github.com/elkingahmad49-glitch" target="_blank" class="soc-btn"><span class="ic">🐙</span> GitHub</a>
+        <a href="https://github.com" target="_blank" class="soc-btn"><span class="ic">🐙</span> GitHub</a>
         <a href="mailto:elkingahmad49@gmail.com" class="soc-btn"><span class="ic">✉️</span> Email</a>
       </div>
       <form class="contact-form" onsubmit="return false;">
@@ -727,13 +727,20 @@
   const termLines = [
     {t:'$ ', c:'php artisan serve', cls:''},
     {t:'', c:'Server running on http://127.0.0.1:8000', cls:'ok'},
+    {t:'$ ', c:'npm run dev', cls:''},
+    {t:'', c:'VITE ready in 320ms', cls:'ok'},
+    {t:'', c:'➜  Local: http://localhost:5173', cls:'ok'},
+    {t:'$ ', c:'php artisan migrate', cls:''},
+    {t:'', c:'✓ Migrations completed', cls:'ok'},
+    {t:'$ ', c:'git add .', cls:''},
+    {t:'$ ', c:'git commit -m "update landing page"', cls:''},
     {t:'$ ', c:'git push origin main', cls:''},
     {t:'', c:'✓ Deployed to production', cls:'ok'},
   ];
   const termBody = document.getElementById('termBody');
   let li=0, ci=0;
   function typeTerm(){
-    if(li>=termLines.length){ setTimeout(()=>{termBody.innerHTML='';li=0;ci=0;typeTerm();},2200); return; }
+    if(li>=termLines.length){ setTimeout(()=>{termBody.innerHTML='';li=0;ci=0;typeTerm();},2600); return; }
     const line = termLines[li];
     if(ci===0){
       const div=document.createElement('div');
@@ -746,11 +753,13 @@
     if(ci<line.c.length){
       txtSpan.textContent += line.c[ci];
       ci++;
-      setTimeout(typeTerm, 28+Math.random()*35);
+      termBody.scrollTop = termBody.scrollHeight;
+      setTimeout(typeTerm, 22+Math.random()*30);
     } else {
       div.querySelector('.cursor').remove();
       li++; ci=0;
-      setTimeout(typeTerm, 380);
+      termBody.scrollTop = termBody.scrollHeight;
+      setTimeout(typeTerm, 340);
     }
   }
   typeTerm();
